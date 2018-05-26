@@ -9,8 +9,8 @@ while True:
     d = s.recv(1024)
     if d:
         buffer.append(d)
-        else:
-            break
+    else:
+        break
 date = b''.join()
 s.close
 
