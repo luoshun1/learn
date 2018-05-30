@@ -41,4 +41,4 @@ def copyFileByTargetChannels(rootPath, channelList, target):
 
 copyFileByTargetChannels(ROOTPATH, TARGETCHANNELS, TARGETFILE)
 
-# asldfkjjasdlfkj
+# asldfkjjasdlfkjsadkfjoasldfj
