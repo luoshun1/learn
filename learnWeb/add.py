@@ -40,3 +40,5 @@ def copyFileByTargetChannels(rootPath, channelList, target):
 		addByTargetChannels(SOURCECHANNEL, tag1)
 
 copyFileByTargetChannels(ROOTPATH, TARGETCHANNELS, TARGETFILE)
+
+# asldfkjjasdlfkjsadkfjoasldfj
