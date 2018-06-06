@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>华为包权限.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: "Segoe WPC", "Segoe UI", "SFUIText-Light", "HelveticaNeue-Light", sans-serif, "Droid Sans Fallback";
+	font-size: 14px;
+	padding: 0 12px;
+	line-height: 22px;
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	color: #4080D0;
+	text-decoration: none;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+h1 code,
+h2 code,
+h3 code,
+h4 code,
+h5 code,
+h6 code {
+	font-size: inherit;
+	line-height: auto;
+}
+
+a:hover {
+	color: #4080D0;
+	text-decoration: underline;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left: 5px solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 14px;
+	line-height: 19px;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+.mac code {
+	font-size: 12px;
+	line-height: 18px;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+/** Theming */
+
+.vscode-light,
+.vscode-light pre code {
+	color: rgb(30, 30, 30);
+}
+
+.vscode-dark,
+.vscode-dark pre code {
+	color: #DDD;
+}
+
+.vscode-high-contrast,
+.vscode-high-contrast pre code {
+	color: white;
+}
+
+.vscode-light code {
+	color: #A31515;
+}
+
+.vscode-dark code {
+	color: #D7BA7D;
+}
+
+.vscode-light pre:not(.hljs),
+.vscode-light code > div {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre:not(.hljs),
+.vscode-dark code > div {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre:not(.hljs),
+.vscode-high-contrast code > div {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+.vscode-light blockquote,
+.vscode-dark blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.vscode-high-contrast blockquote {
+	background: transparent;
+	border-color: #fff;
+}
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family:  "Meiryo", "Segoe WPC", "Segoe UI", "SFUIText-Light", "HelveticaNeue-Light", sans-serif, "Droid Sans Fallback";
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+</head>
+<body>
+<h2 id="%E6%89%80%E6%9C%89%E6%9D%83%E9%99%90">所有权限</h2>
+<ul>
+<li><strong>ACCESS_COARSE_LOCATION</strong> <em>危险</em>
+<blockquote>
+<p>通过WiFi或移动基站的方式获取用户错略的经纬度信息，定位精度大概误差在30~1500米</p>
+</blockquote>
+</li>
+<li><strong>ACCESS_DOWNLOAD_MANAGER</strong>
+<blockquote></blockquote>
+</li>
+<li><strong>ACCESS_FINE_LOCATION</strong>
+<blockquote></blockquote>
+</li>
+<li><strong>ACCESS_MTK_MMHW</strong>
+<blockquote></blockquote>
+</li>
+<li><strong>ACCESS_NETWORK_STATE</strong>
+<blockquote></blockquote>
+</li>
+<li><strong>ACCESS_WIFI_STATE</strong>
+<blockquote></blockquote>
+</li>
+<li><strong>BLUETOOTH</strong>
+<blockquote></blockquote>
+</li>
+<li><strong>BLUETOOTH_ADMIN</strong>
+<blockquote></blockquote>
+</li>
+<li><strong>CALL_PHONE</strong>
+<blockquote></blockquote>
+</li>
+<li><strong>CAMERA</strong>
+<blockquote></blockquote>
+</li>
+<li><strong>CHANGE_NETWORK_STATE</strong>
+<blockquote></blockquote>
+</li>
+<li><strong>CHANGE_WIFI_STATE</strong>
+<blockquote></blockquote>
+</li>
+<li><strong>com.android.launcher.permission.INSTALL_SHORTCUT</strong>
+<blockquote></blockquote>
+</li>
+<li><strong>com.android.launcher.permission.READ_SETTINGS</strong>
+<blockquote></blockquote>
+</li>
+<li><strong>com.android.launcher.permission.READ_SHTTINGS</strong>
+<blockquote></blockquote>
+</li>
+<li><strong>com.android.launcher.permission.UNINSTALL_SHORTCUT</strong>
+<blockquote></blockquote>
+</li>
+<li><strong>com.android.launcher.permission.WRITE_SETTINGS</strong>
+<blockquote></blockquote>
+</li>
+<li><strong>com.android.launcher.permission.WRITE_SHTTINGS</strong>
+<blockquote></blockquote>
+</li>
+<li><strong>com.huawei.appmarket.provider.readPermission</strong>
+<blockquote></blockquote>
+</li>
+<li><strong>com.huawei.appmarket.provider.readPermission</strong>
+<blockquote></blockquote>
+</li>
+<li><strong>com.huawei.hwid.permission.ACCESS</strong>
+<blockquote></blockquote>
+</li>
+<li><strong>DISABLE_KEYGUARD</strong>
+<blockquote></blockquote>
+</li>
+<li><strong>GET_ACCOUNTS</strong>
+<blockquote></blockquote>
+</li>
+<li><strong>GET_PACKAGE_SIZE</strong>
+<blockquote></blockquote>
+</li>
+<li><strong>GET_TASKS</strong>
+<blockquote></blockquote>
+</li>
+<li><strong>INTERNET</strong>
+<blockquote></blockquote>
+</li>
+<li><strong>MANAGE_ACCOUNTS</strong>
+<blockquote></blockquote>
+</li>
+<li><strong>MODIFY_AUDIO_SETTINGS</strong>
+<blockquote></blockquote>
+</li>
+<li><strong>MOUNT_UNMOUNT_FILESYSTEMS</strong>
+<blockquote></blockquote>
+</li>
+<li><strong>READ_CONTACTS</strong>
+<blockquote></blockquote>
+</li>
+<li><strong>READ_EXTERNAL_STORAGE</strong>
+<blockquote></blockquote>
+</li>
+<li><strong>READ_PHONE_STATE</strong>
+<blockquote></blockquote>
+</li>
+<li><strong>RECORD_AUDIO</strong>
+<blockquote></blockquote>
+</li>
+<li><strong>SEND_SMS</strong>
+<blockquote></blockquote>
+</li>
+<li><strong>SYSTEM_ALERT_WINDOW</strong>
+<blockquote></blockquote>
+</li>
+<li><strong>SYSTEM_OVERLAY_WINDOW</strong>
+<blockquote></blockquote>
+</li>
+<li><strong>VIBRATE</strong>
+<blockquote></blockquote>
+</li>
+<li><strong>WRITE_EXTERNAL_STORAGE</strong>
+<blockquote></blockquote>
+</li>
+<li><strong>WRITE_SETTINGS</strong></li>
+</ul>
+<h2 id="%E8%A1%A8%E6%A0%BC">表格</h2>
+<table>
+<thead>
+<tr>
+<th>华为包</th>
+<th>权限名</th>
+<th>权限作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>危险权限</td>
+<td><strong><code>ACCESS_COARSE_LOCATION</code></strong></td>
+<td>通过WiFi或移动基站的方式获取用户错略的经纬度信息，定位精度大概误差在30~1500米</td>
+</tr>
+<tr>
+<td></td>
+<td><strong><code>ACCESS_FINE_LOCATION</code></strong></td>
+<td>通过GPS芯片接收卫星的定位信息，定位精度达10米以内</td>
+</tr>
+<tr>
+<td></td>
+<td><strong><code>CALL_PHONE</code></strong></td>
+<td>允许应用程序启动一个电话，而不需要通过拨号用户界面来确认调用</td>
+</tr>
+<tr>
+<td></td>
+<td><strong><code>CAMERA</code></strong></td>
+<td>访问相机设备</td>
+</tr>
+<tr>
+<td></td>
+<td><strong><code>GET_ACCOUNTS</code></strong></td>
+<td>允许访问帐户服务中的帐户列表</td>
+</tr>
+<tr>
+<td></td>
+<td><strong><code>READ_CONTACTS</code></strong></td>
+<td>允许应用访问联系人通讯录信息</td>
+</tr>
+<tr>
+<td></td>
+<td><strong><code>READ_EXTERNAL_STORAGE</code></strong></td>
+<td>允许应用程序读取外部存储卡</td>
+</tr>
+<tr>
+<td></td>
+<td><strong><code>READ_PHONE_STATE</code></strong></td>
+<td>允许只读访问电话状态，包括设备的电话号码，当前蜂窝网络信息，任何正在进行的呼叫的状态，以及在设备上注册的任何电话帐户的列表</td>
+</tr>
+<tr>
+<td></td>
+<td><strong><code>RECORD_AUDIO</code></strong></td>
+<td>允许应用程序录制音频</td>
+</tr>
+<tr>
+<td></td>
+<td><strong><code>SEND_SMS</code></strong></td>
+<td>允许应用程序发送短信消息</td>
+</tr>
+<tr>
+<td></td>
+<td><strong><code>WRITE_EXTERNAL_STORAGE</code></strong></td>
+<td>允许应用程序写外部存储卡</td>
+</tr>
+<tr>
+<td>---</td>
+<td>---</td>
+<td>---</td>
+</tr>
+<tr>
+<td>一般权限</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td><strong><code>ACCESS_DOWNLOAD_MANAGER</code></strong></td>
+<td>下载相关权限</td>
+</tr>
+<tr>
+<td></td>
+<td><strong><code>ACCESS_NETWORK_STATE</code></strong></td>
+<td>允许应用程序访问有关网络的信息</td>
+</tr>
+<tr>
+<td></td>
+<td><strong><code>ACCESS_WIFI_STATE</code></strong></td>
+<td>允许应用程序访问关于Wi-Fi网络的信息</td>
+</tr>
+<tr>
+<td></td>
+<td><strong><code>BLUETOOTH</code></strong></td>
+<td>允许应用程序连接到成对的蓝牙设备</td>
+</tr>
+<tr>
+<td></td>
+<td><strong><code>BLUETOOTH_ADMIN</code></strong></td>
+<td>允许应用程序发现和配对蓝牙设备</td>
+</tr>
+<tr>
+<td></td>
+<td><strong><code>CHANGE_NETWORK_STATE</code></strong></td>
+<td>允许应用程序更改网络连接状态</td>
+</tr>
+<tr>
+<td></td>
+<td><strong><code>CHANGE_WIFI_STATE</code></strong></td>
+<td>允许应用程序改变Wi-Fi连接状态</td>
+</tr>
+<tr>
+<td></td>
+<td><strong><code>DISABLE_KEYGUARD</code></strong></td>
+<td>允许应用程序在不安全的情况下禁用键盘锁定</td>
+</tr>
+<tr>
+<td></td>
+<td><strong><code>GET_PACKAGE_SIZE</code></strong></td>
+<td>允许应用程序查找任何包裹所使用的空间</td>
+</tr>
+<tr>
+<td></td>
+<td><strong><code>INTERNET</code></strong></td>
+<td>允许应用程序打开网络sockets</td>
+</tr>
+<tr>
+<td></td>
+<td><strong><code>MODIFY_AUDIO_SETTINGS</code></strong></td>
+<td>允许应用程序修改全局音频设置</td>
+</tr>
+<tr>
+<td></td>
+<td><strong><code>VIBRATE</code></strong></td>
+<td>允许使用振动器</td>
+</tr>
+<tr>
+<td>---</td>
+<td>---</td>
+<td>---</td>
+</tr>
+<tr>
+<td>签名权限</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td><strong><code>SYSTEM_ALERT_WINDOW</code></strong></td>
+<td>显示系统窗口</td>
+</tr>
+<tr>
+<td></td>
+<td><strong><code>WRITE_SETTINGS</code></strong></td>
+<td>允许读写系统设置项</td>
+</tr>
+<tr>
+<td>---</td>
+<td>---</td>
+<td>---</td>
+</tr>
+<tr>
+<td>其他权限</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td><strong><code>ACCESS_MTK_MMHW</code></strong></td>
+<td>未知权限</td>
+</tr>
+<tr>
+<td></td>
+<td><strong><code>GET_TASKS</code></strong></td>
+<td>允许程序获取当前或最近运行的应用,api lever为21是放弃此权限</td>
+</tr>
+<tr>
+<td></td>
+<td><strong><code>MANAGE_ACCOUNTS</code></strong></td>
+<td>允许程序管理AccountManager中的账户列表</td>
+</tr>
+<tr>
+<td></td>
+<td><strong><code>MOUNT_UNMOUNT_FILESYSTEMS</code></strong></td>
+<td>挂载、反挂载外部文件系统</td>
+</tr>
+<tr>
+<td></td>
+<td><strong><code>SYSTEM_OVERLAY_WINDOW</code></strong></td>
+<td>未知权限</td>
+</tr>
+</tbody>
+</table>
+<pre class="hljs"><code><div>st=&gt;start: Start
+i=&gt;inputoutput: 输入年份n
+cond1=&gt;condition: n能否被4整除？
+cond2=&gt;condition: n能否被100整除？
+cond3=&gt;condition: n能否被400整除？
+o1=&gt;inputoutput: 输出非闰年
+o2=&gt;inputoutput: 输出非闰年
+o3=&gt;inputoutput: 输出闰年
+o4=&gt;inputoutput: 输出闰年
+e=&gt;end
+st-&gt;i-&gt;cond1
+cond1(no)-&gt;o1-&gt;e
+cond1(yes)-&gt;cond2
+cond2(no)-&gt;o3-&gt;e
+cond2(yes)-&gt;cond3
+cond3(yes)-&gt;o2-&gt;e
+cond3(no)-&gt;o4-&gt;e
+</div></code></pre>
+
+</body>
+</html>
