@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>权限.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: "Segoe WPC", "Segoe UI", "SFUIText-Light", "HelveticaNeue-Light", sans-serif, "Droid Sans Fallback";
+	font-size: 14px;
+	padding: 0 12px;
+	line-height: 22px;
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	color: #4080D0;
+	text-decoration: none;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+h1 code,
+h2 code,
+h3 code,
+h4 code,
+h5 code,
+h6 code {
+	font-size: inherit;
+	line-height: auto;
+}
+
+a:hover {
+	color: #4080D0;
+	text-decoration: underline;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left: 5px solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 14px;
+	line-height: 19px;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+.mac code {
+	font-size: 12px;
+	line-height: 18px;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+/** Theming */
+
+.vscode-light,
+.vscode-light pre code {
+	color: rgb(30, 30, 30);
+}
+
+.vscode-dark,
+.vscode-dark pre code {
+	color: #DDD;
+}
+
+.vscode-high-contrast,
+.vscode-high-contrast pre code {
+	color: white;
+}
+
+.vscode-light code {
+	color: #A31515;
+}
+
+.vscode-dark code {
+	color: #D7BA7D;
+}
+
+.vscode-light pre:not(.hljs),
+.vscode-light code > div {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre:not(.hljs),
+.vscode-dark code > div {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre:not(.hljs),
+.vscode-high-contrast code > div {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+.vscode-light blockquote,
+.vscode-dark blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.vscode-high-contrast blockquote {
+	background: transparent;
+	border-color: #fff;
+}
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family:  "Meiryo", "Segoe WPC", "Segoe UI", "SFUIText-Light", "HelveticaNeue-Light", sans-serif, "Droid Sans Fallback";
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+</head>
+<body>
+<h2 id="%E4%B8%80%E8%88%AC%E6%9D%83%E9%99%90">一般权限</h2>
+<ul>
+<li><strong>INTERNET</strong>
+<blockquote>
+<p>允许程序访问网络连接，可能产生GPRS流量</p>
+</blockquote>
+</li>
+<li><strong>WAKE_LOCK</strong>
+<blockquote>
+<p>允许程序在手机屏幕关闭后后台进程仍然运行</p>
+</blockquote>
+</li>
+<li><strong>ACCESS_NETWORK_STATE</strong>
+<blockquote>
+<p>允许程序获取网络信息状态，如当前的网络连接是否有效</p>
+</blockquote>
+</li>
+<li><strong>ACCESS_WIFI_STATE</strong>
+<blockquote>
+<p>允许程序获取当前WiFi接入的状态以及WLAN热点的信息</p>
+</blockquote>
+</li>
+<li><strong>CHANGE_WIFI_STATE</strong>
+<blockquote>
+<p>允许程序改变WiFi状态</p>
+</blockquote>
+</li>
+<li><strong>VIBRATE</strong>
+<blockquote>
+<p>允许程序振动</p>
+</blockquote>
+</li>
+<li><strong>MODIFY_AUDIO_SETTINGS</strong>
+<blockquote>
+<p>允许程序修改声音设置信息：GVoice语音的权限，此版本可删除</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="%E6%95%8F%E6%84%9F%E6%9D%83%E9%99%90">敏感权限</h2>
+<ul>
+<li><strong>WRITE_EXTERNAL_STORAGE</strong>
+<blockquote>
+<p>允许程序读写扩展存储卡</p>
+</blockquote>
+</li>
+<li><strong>READ_EXTERNAL_STORAGE</strong>
+<blockquote>
+<p>允许程序读扩展存储卡</p>
+</blockquote>
+</li>
+<li><strong>RECORD_AUDIO</strong>
+<blockquote>
+<p>允许程序录制声音通过手机或耳机的麦克</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84%E6%9D%83%E9%99%90">不知道的权限</h2>
+<ul>
+<li><strong>CHECK_LICENSE</strong>
+<blockquote>
+<p>应用市场许可证</p>
+</blockquote>
+</li>
+<li><strong>MOUNT_UNMOUNT_FILESYSTEMS</strong>
+<blockquote>
+<p>在SDCard中创建与删除文件权限</p>
+</blockquote>
+</li>
+<li><strong>GET_TASK</strong>
+<blockquote>
+<p>允许程序获取系统当前运行的任务信息</p>
+</blockquote>
+</li>
+<li><strong>BILLING</strong>
+<blockquote>
+<p>谷歌内支付</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="%E8%8E%B7%E5%8F%96%E7%9A%84%E4%BF%A1%E6%81%AF">获取的信息</h2>
+<ul>
+<li><strong>读写sdCard</strong>
+<blockquote>
+<p>用于游戏的正常运行</p>
+</blockquote>
+</li>
+<li><strong>获取网络状态和wifi状态</strong>
+<blockquote>
+<p>用于游戏和广告正常运行</p>
+</blockquote>
+</li>
+<li><strong>Google Advertising ID</strong>
+<blockquote>
+<p>用于统计和分析数据：目前只用在了广告方面</p>
+</blockquote>
+</li>
+<li><strong>手机当前网络链接IP</strong>
+<blockquote>
+<p>用于房间分配，好友服，邮件服分配等</p>
+</blockquote>
+</li>
+<li><strong>ANDROID_ID</strong>
+<blockquote>
+<p>用于的统计分析，此版本可删除</p>
+</blockquote>
+</li>
+<li><strong>SERIAL</strong>
+<blockquote>
+<p>安卓设置里面的序列号，用于统计分析，此版本可删除</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="%E8%A1%A8%E6%A0%BC">表格</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><strong>谷歌权限</strong></th>
+<th>权限名</th>
+<th>权限用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><strong>一般权限</strong></td>
+<td><strong><code>INTERNET</code></strong></td>
+<td>允许程序访问网络连接，可能产生GPRS流量</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td><strong><code>WAKE_LOCK</code></strong></td>
+<td>允许程序在手机屏幕关闭后后台进程仍然运行</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td><strong><code>ACCESS_NETWORK_STATE</code></strong></td>
+<td>允许程序获取网络信息状态，如当前的网络连接是否有效</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td><strong><code>ACCESS_WIFI_STATE</code></strong></td>
+<td>允许程序获取当前WiFi接入的状态以及WLAN热点的信息</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td><strong><code>CHANGE_WIFI_STATE</code></strong></td>
+<td>允许程序改变WiFi状态</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td><strong><code>VIBRATE</code></strong></td>
+<td>允许程序振动</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>敏感权限</strong></td>
+<td><strong><code>MODIFY_AUDIO_SETTINGS</code></strong></td>
+<td>允许程序修改声音设置信息</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td><strong><code>WRITE_EXTERNAL_STORAGE</code></strong></td>
+<td>允许程序写扩展存储卡</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td><strong><code>READ_EXTERNAL_STORAGE</code></strong></td>
+<td>允许程序读扩展存储卡</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td><strong><code>RECORD_AUDIO</code></strong></td>
+<td>允许程序录制声音通过手机或耳机的麦克</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>不确定权限</strong></td>
+<td><strong><code>CHECK_LICENSE</code></strong></td>
+<td>应用市场许可证</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td><strong><code>MOUNT_UNMOUNT_FILESYSTEMS</code></strong></td>
+<td>在SDCard中创建与删除文件权限</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td><strong><code>GET_TASK</code></strong></td>
+<td>允许程序获取系统当前运行的任务信息</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td><strong><code>BILLING</code></strong></td>
+<td>谷歌内支付</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th><strong>获取信息</strong></th>
+<th>信息名</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td>ANDROID_ID</td>
+<td>Android系统第一次启动时产生的一个64bit（16BYTES）数，如果设备被wipe还原后，该ID将被重置（变化）</td>
+</tr>
+<tr>
+<td></td>
+<td>AdvertisingId</td>
+<td>用于统计分析</td>
+</tr>
+<tr>
+<td></td>
+<td>SERIAL</td>
+<td>安卓设置里面的序列号</td>
+</tr>
+</tbody>
+</table>
+
+</body>
+</html>
