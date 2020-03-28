@@ -1,0 +1,38 @@
+# 阿里云ecs个人免费一个月体验版升级python3过程
+- 由于个人免费版的ubuntu只能选择14.04, 所以默认的python3版本是python3.4.3, 本意是想根据[DjangoBlog](https://github.com/liangliangyy/DjangoBlog)搭建一个博客, 所以为了避免版本不同造成麻烦, 还是升级一下python3
+	- 1.官网下载最新python(Python-3.8.2.tgz)
+	- 2.将下载的python传到服务器
+		- 在本地输入:scp -r local_folder remote_username@remote_ip:remote_folder(填入自己的服务器信息和路径)
+		- 登录服务器找到刚刚复制过来的python文件,并将其复制到/usr里面
+			- mv ./Python-3.8.2 /usr/local/bin/
+	- 3.解压并安装python3
+		- cd /usr/local/bin/
+		- tar xf Python-3.8.2.tgz
+		- cd Python-3.8.2/
+		- ./configure --prefix=/usr/local/python3.8
+		- make
+		- make install
+	- 4.将python3.4.3替换
+		- rm /usr/bin/python3 (不想删可以改名)
+		- ln -s /usr/local/python3.8/bin/python3.8 /usr/bin/python3
+	- 5.修改.bashrc
+		- 添加一行: export PATH=$PATH:$HOME/bin:/usr/local/python3.8/bin
+		- 退出.bashrc并输入: source ~/.bashrc
+	- 6.python3.8安装成功
+		- 终端输入: python3测试
+	- 7.pip3配置
+		- rm /usr/bin/pip3 (不想删可以改名)
+		- ln -s /usr/local/python3.8/bin/pip3.8 /usr/bin/pip3
+	- 8.pip3配置完成
+		- pip3 -V测试
+	- 9.安装virtualenv及virtualenvwrapper
+		- pip3 install virtualenv
+		- pip3 install virtualenvwrapper
+	- 10.修改.bashrc
+		- export WORKON_HOME=$HOME/.virtualenvs
+		- export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
+		- export VIRTUALENVWRAPPER_VIRTUALENV=/usr/local/python3.8/bin/virtualenv
+		- source /usr/local/python3.8/bin/virtualenvwrapper.sh
+		- 退出.bashrc并执行: source ~/.bashrc
+	- 11.创建一个虚拟环境
+		- mkvirtualenv testenv
