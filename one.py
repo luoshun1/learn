@@ -1,9 +1,4 @@
-<<<<<<< HEAD
-import socket
 
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.connect(('www.sina.com.cn'))
-=======
 # -*- coding: utf-8 -*-
 import socket
 import os
@@ -30,4 +25,3 @@ print("hahhah")
 # with open('sina.html', 'wb') as f:
 # 	f.write(html)
 print("git lean")
->>>>>>> 2cbd86c989444630706564e5538f7fa46c2f149a
